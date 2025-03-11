@@ -4,6 +4,11 @@
 ## ‼️공지‼️
 현재 서버가 운영되고 있지 않아 테스트가 불가합니다. 사용을 원하시면 serverUrl이라고 되어있는 곳에 번역 API를 연동하시면 됩니다. (API 응답 형태 맞춰서 만들어야함)
 
+**데모 영상**
+https://github.com/user-attachments/assets/c020082a-fa58-4d18-85b2-cbf1d5a5dfd6
+
+서버가 운영되고 있지 않아 실패하는 점 양해부탁드립니다 ㅎㅎ
+
 ## 📍 기능
 현재는 세가지 언어(English, Japanese, Korean)에 대해 교차 번역이 가능합니다. 필요시 요청주시면 추가될 수 있습니다.
 
@@ -47,11 +52,6 @@
 4. translator 폴더로 가서 manifest.json 파일 클릭 - 열기 를 눌러주세요.
 
 5. 오른쪽 패널의 plugins를 눌러주면 translator가 추가되어 있습니다. (최초 등록시에는 바로 안뜰 수도 있습니다. 안뜬다면 3번과 4번을 한번 더 반복해주세요.)
-
----
-**풀버전 영상**
-
-https://github.com/user-attachments/assets/c020082a-fa58-4d18-85b2-cbf1d5a5dfd6
 
 
 
