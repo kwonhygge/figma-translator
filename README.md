@@ -5,6 +5,7 @@
 현재 서버가 운영되고 있지 않아 테스트가 불가합니다. 사용을 원하시면 serverUrl이라고 되어있는 곳에 번역 API를 연동하시면 됩니다. (API 응답 형태 맞춰서 만들어야함)
 
 **데모 영상**
+
 https://github.com/user-attachments/assets/c020082a-fa58-4d18-85b2-cbf1d5a5dfd6
 
 서버가 운영되고 있지 않아 실패하는 점 양해부탁드립니다 ㅎㅎ
