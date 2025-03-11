@@ -1,0 +1,218 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css"
+    />
+    <style>
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      p {
+        font-size: 15px;
+      }
+      hr {
+        border: 0.5px solid #d8dde4;
+      }
+      #original-text {
+        margin: 15px 0 0;
+        color: #999;
+      }
+      #translated-text {
+        margin: 8px 0 0;
+        color: #7073ff;
+      }
+      .content-container {
+        padding: 10px;
+      }
+      .button-wrapper {
+        display: flex;
+        justify-content: center;
+      }
+      .button {
+        width: 100%;
+        height: 33px;
+        font-weight: 700 !important;
+        background: #7073ff;
+        margin: 10px 0 0;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .language-select-container {
+        display: flex;
+        justify-content: center;
+        border-radius: 5px;
+        background: #f7f9fc;
+      }
+      .select-container {
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+      .select-container select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: transparent;
+        border: none;
+        padding: 8px 16px;
+        font-size: 12px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .select-container select:focus {
+        outline: none;
+        border-color: #555;
+      }
+      .select-container select::-ms-expand {
+        display: none;
+      }
+      .select-container label {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        font-size: 14px;
+        font-weight: bold;
+        color: #666;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+      .select-container select:focus + label,
+      .select-container select:not(:placeholder-shown) + label {
+        top: 10px;
+        left: 5px;
+        font-size: 12px;
+        color: #999;
+        background-color: #fff;
+        padding: 0 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content-container">
+      <div class="language-select-container">
+        <div class="select-container">
+          <label for="source-language-select"></label>
+          <select name="source" id="source-language-select">
+            <option value="JA">Japanese</option>
+            <option value="KO">Korean</option>
+            <option value="EN">English</option>
+          </select>
+        </div>
+        <div class="button-wrapper">
+          <button id="language-change-button">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="Frame 321">
+                <g id="Group 3" opacity="0.4">
+                  <g id="Group 1">
+                    <path
+                      id="Union"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M12 4L15 6.5L12 9V7H6V6H12V4Z"
+                      fill="#333333"
+                    />
+                  </g>
+                  <g id="Group 2">
+                    <path
+                      id="Union_2"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M6 9L3 11.5L6 14V12H12V11H6V9Z"
+                      fill="#333333"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button>
+        </div>
+        <div class="select-container">
+          <label for="target-language-select"></label>
+          <select name="target" id="target-language-select">
+            <option value="KO">Korean</option>
+            <option value="EN">English</option>
+            <option value="JA">Japanese</option>
+          </select>
+        </div>
+      </div>
+      <div class="button-wrapper">
+        <button id="translate-button" class="button">번역</button>
+      </div>
+      <hr />
+      <p id="original-text"></p>
+      <p id="translated-text"></p>
+    </div>
+
+    <script>
+      document.getElementById("translate-button").onclick = () => {
+        const sourceLanguageSelectElement = document.getElementById(
+          "source-language-select"
+        );
+        const targetLanguageSelectElement = document.getElementById(
+          "target-language-select"
+        );
+
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: "translate",
+              source: sourceLanguageSelectElement.value,
+              target: targetLanguageSelectElement.value,
+            },
+          },
+          "*"
+        );
+      };
+
+      document.getElementById("language-change-button").onclick = (e) => {
+        const sourceLanguageSelectElement = document.getElementById(
+          "source-language-select"
+        );
+        const targetLanguageSelectElement = document.getElementById(
+          "target-language-select"
+        );
+
+        const sourceLanguage = sourceLanguageSelectElement.value;
+        const targetLanguage = targetLanguageSelectElement.value;
+
+        sourceLanguageSelectElement.value = targetLanguage;
+        targetLanguageSelectElement.value = sourceLanguage;
+      };
+
+      window.addEventListener("message", (event) => {
+        const originalTextElement = document.getElementById("original-text");
+        const translatedTextElement =
+          document.getElementById("translated-text");
+
+        if (event.data.pluginMessage.isLoading) {
+          translatedTextElement.innerText = "번역중...";
+        } else {
+          if (!!event.data.pluginMessage.translatedText) {
+            translatedTextElement.innerText =
+              event.data.pluginMessage.translatedText;
+          }
+        }
+
+        if (!!event.data.pluginMessage.originalText) {
+          originalTextElement.innerText = event.data.pluginMessage.originalText;
+        }
+
+        if (!!event.data.pluginMessage.translatedText) {
+          translatedTextElement.innerText =
+            event.data.pluginMessage.translatedText;
+        }
+      });
+    </script>
+  </body>
+</html>
