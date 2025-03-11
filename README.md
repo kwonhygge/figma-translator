@@ -40,7 +40,7 @@ https://github.com/user-attachments/assets/c020082a-fa58-4d18-85b2-cbf1d5a5dfd6
 
 5. 다시 상단의 plugins - development를 누르면 translator가 추가되어 있습니다. (최초 등록시에는 바로 안뜰 수도 있습니다. 안뜬다면 3번과 4번을 한번 더 반복해주세요.)
 
-<br/><br/><br/><br/>
+<br/><br/>
 
 <div id='read-mode'/>
   
